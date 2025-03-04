@@ -5,6 +5,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:newzly/core/utils/api_services.dart';
 import 'package:newzly/core/utils/dio_helper.dart';
+import 'package:newzly/features/home/data/data_sources/home_local_data_source.dart';
+import 'package:newzly/features/home/data/data_sources/home_remote_data_source.dart';
+import 'package:newzly/features/home/data/repositories/home_repository_imp.dart';
+import 'package:newzly/features/home/domain/use_cases/fetch_business_news_use_case.dart';
+import 'package:newzly/features/home/domain/use_cases/fetch_entertainment_news_use_case.dart';
+import 'package:newzly/features/home/domain/use_cases/fetch_general_news_use_case.dart';
+import 'package:newzly/features/home/domain/use_cases/fetch_health_news_use_case.dart';
+import 'package:newzly/features/home/domain/use_cases/fetch_sports_news_use_case.dart';
+import 'package:newzly/features/home/domain/use_cases/fetch_technology_news_use_case.dart';
 
 GetIt getIt = GetIt.instance;
 String baseUrl =
@@ -34,4 +43,45 @@ initGetIt() {
       ),
   );
   getIt.registerLazySingleton<ApiServices<dynamic>>(() => DioHelper(getIt()));
+
+  // Data sources
+
+  //Remote data sources
+  getIt.registerLazySingleton<HomeRemoteDataSourceImplementation>(
+    () => HomeRemoteDataSourceImplementation(dioHelper: getIt()),
+  );
+
+  //Local data sources
+  getIt.registerLazySingleton<HomeLocalDataSourceImplementation>(
+    () => HomeLocalDataSourceImplementation(),
+  );
+  // Repositories
+  getIt.registerLazySingleton<HomeRepositoryImplementation>(
+    () => HomeRepositoryImplementation(
+      homeRemoteDataSource: getIt(),
+      homeLocalDataSource: getIt(),
+    ),
+  );
+
+  // Use cases
+  getIt.registerLazySingleton<FetchGeneralNewsUseCase>(
+    () => FetchGeneralNewsUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<FetchSportsNewsUseCase>(
+    () => FetchSportsNewsUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<FetchHealthNewsUseCase>(
+    () => FetchHealthNewsUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<FetchTechnologyNewsUseCase>(
+    () => FetchTechnologyNewsUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<FetchEntertainmentNewsUseCase>(
+    () => FetchEntertainmentNewsUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<FetchBusinessNewsUseCase>(
+    () => FetchBusinessNewsUseCase(getIt()),
+  );
+
+  //Cubits
 }

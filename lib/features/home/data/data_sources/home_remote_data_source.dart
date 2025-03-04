@@ -23,8 +23,8 @@ abstract class HomeRemoteDataSource {
 }
 
 class HomeRemoteDataSourceImplementation extends HomeRemoteDataSource {
-  final DioHelper _dioHelper;
-  HomeRemoteDataSourceImplementation(this._dioHelper);
+  final DioHelper dioHelper;
+  HomeRemoteDataSourceImplementation({required this.dioHelper});
 
   @override
   Future<List<ArticleEntity>> fetchCategoryNews({
@@ -52,7 +52,7 @@ class HomeRemoteDataSourceImplementation extends HomeRemoteDataSource {
       case NewsCategory.entertainment:
         newsCategory = 'entertainment';
     }
-    Map<String, dynamic> data = await _dioHelper.get(
+    Map<String, dynamic> data = await dioHelper.get(
       endPoint: 'category=$newsCategory',
     );
     late List<ArticleEntity> articles = getRemoteArticlesList(data: data);
