@@ -1,5 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:newzly/core/injection/service_locator.dart';
+import 'package:newzly/core/utils/initialize_hive.dart';
 
 Future<void> initializeApp() async {
-  dotenv.load(fileName: 'assets/.env');
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: 'assets/.env');
+  await HiveHelper.initHive();
+  initGetIt();
 }

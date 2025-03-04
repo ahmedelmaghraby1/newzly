@@ -2,7 +2,7 @@ enum NewsCategory {
   general,
   health,
   sports,
-  technoogy,
+  technology,
   business,
   entertainment,
 }
