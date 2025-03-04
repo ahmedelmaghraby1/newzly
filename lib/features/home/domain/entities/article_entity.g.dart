@@ -21,13 +21,14 @@ class ArticleEntityAdapter extends TypeAdapter<ArticleEntity> {
       articleUrl: fields[1] as String,
       articleUrlToImage: fields[2] as String?,
       articlePublishedAt: fields[3] as String,
+      articlAuthor: fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ArticleEntity obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.articleTitle)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class ArticleEntityAdapter extends TypeAdapter<ArticleEntity> {
       ..writeByte(2)
       ..write(obj.articleUrlToImage)
       ..writeByte(3)
-      ..write(obj.articlePublishedAt);
+      ..write(obj.articlePublishedAt)
+      ..writeByte(4)
+      ..write(obj.articlAuthor);
   }
 
   @override

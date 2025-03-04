@@ -9,7 +9,7 @@ class HiveHelper {
     if (!Hive.isAdapterRegistered(ArticleEntityAdapter().typeId)) {
       Hive.registerAdapter(ArticleEntityAdapter());
     }
-    Future.wait([
+    await Future.wait([
       Hive.openBox<ArticleEntity>('generalArticles'),
       Hive.openBox<ArticleEntity>('healthArticles'),
       Hive.openBox<ArticleEntity>('sportsArticles'),
@@ -26,6 +26,6 @@ class HiveHelper {
   }) {
     late final String categoryName = getCategoryName(category: category);
     late final String articlesBoxName = '${categoryName}Articles';
-    Hive.box(articlesBoxName).addAll(articles);
+    Hive.box<ArticleEntity>(articlesBoxName).addAll(articles);
   }
 }

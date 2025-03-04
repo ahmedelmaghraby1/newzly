@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
-import 'package:newzly/core/utils/api_services.dart';
 import 'package:newzly/core/utils/dio_helper.dart';
 import 'package:newzly/features/home/data/data_sources/home_local_data_source.dart';
 import 'package:newzly/features/home/data/data_sources/home_remote_data_source.dart';
@@ -14,6 +13,12 @@ import 'package:newzly/features/home/domain/use_cases/fetch_general_news_use_cas
 import 'package:newzly/features/home/domain/use_cases/fetch_health_news_use_case.dart';
 import 'package:newzly/features/home/domain/use_cases/fetch_sports_news_use_case.dart';
 import 'package:newzly/features/home/domain/use_cases/fetch_technology_news_use_case.dart';
+import 'package:newzly/features/home/presentation/manager/business_news_cubit/business_news_cubit.dart';
+import 'package:newzly/features/home/presentation/manager/entertainment_news_cubit/entertainment_news_cubit.dart';
+import 'package:newzly/features/home/presentation/manager/general_news_cubit/general_news_cubit.dart';
+import 'package:newzly/features/home/presentation/manager/health_news_cubit/health_news_cubit.dart';
+import 'package:newzly/features/home/presentation/manager/sports_news_cubit/sports_news_cubit.dart';
+import 'package:newzly/features/home/presentation/manager/technology_news_cubit/technology_news_cubit.dart';
 
 GetIt getIt = GetIt.instance;
 String baseUrl =
@@ -42,7 +47,7 @@ initGetIt() {
         ),
       ),
   );
-  getIt.registerLazySingleton<ApiServices<dynamic>>(() => DioHelper(getIt()));
+  getIt.registerLazySingleton<DioHelper>(() => DioHelper(getIt()));
 
   // Data sources
 
@@ -84,4 +89,23 @@ initGetIt() {
   );
 
   //Cubits
+  getIt.registerFactory<GeneralNewsCubit>(
+    () => GeneralNewsCubit(fetchGeneralNewsUseCase: getIt()),
+  );
+  getIt.registerFactory<HealthNewsCubit>(
+    () => HealthNewsCubit(fetchHealthNewsUseCase: getIt()),
+  );
+  getIt.registerFactory<SportsNewsCubit>(
+    () => SportsNewsCubit(fetchSportsNewsUseCase: getIt()),
+  );
+  getIt.registerFactory<TechnologyNewsCubit>(
+    () => TechnologyNewsCubit(fetchTechnologyNewsUseCase: getIt()),
+  );
+  getIt.registerFactory<EntertainmentNewsCubit>(
+    () => EntertainmentNewsCubit(fetchEntertainmentNewsUseCase: getIt()),
+  );
+
+  getIt.registerFactory<BusinessNewsCubit>(
+    () => BusinessNewsCubit(fetchBusinessNewsUseCase: getIt()),
+  );
 }

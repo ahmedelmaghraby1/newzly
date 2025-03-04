@@ -26,6 +26,7 @@ class ArticleModel extends ArticleEntity {
          articleUrl: url ?? 'Link',
          articleUrlToImage: urlToImage,
          articlePublishedAt: publishedAt ?? 'Date',
+         articlAuthor: author ?? 'Author',
        );
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(

@@ -13,8 +13,7 @@ class HomeLocalDataSourceImplementation extends HomeLocalDataSource {
   List<ArticleEntity> fetchCategoryNews({required NewsCategory category}) {
     late final String categoryName = getCategoryName(category: category);
     late final String articlesBoxName = '${categoryName}Articles';
-
-    Box<ArticleEntity> box = Hive.box(articlesBoxName);
+    Box<ArticleEntity> box = Hive.box<ArticleEntity>(articlesBoxName);
     return box.values.toList();
   }
 }

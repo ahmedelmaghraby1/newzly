@@ -11,10 +11,13 @@ class ArticleEntity {
   String? articleUrlToImage;
   @HiveField(3)
   String articlePublishedAt;
+  @HiveField(4)
+  String articlAuthor;
   ArticleEntity({
     required this.articleTitle,
     required this.articleUrl,
     required this.articleUrlToImage,
     required this.articlePublishedAt,
+    required this.articlAuthor,
   });
 }

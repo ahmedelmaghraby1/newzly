@@ -4,22 +4,22 @@ String getCategoryName({required NewsCategory category}) {
   late String articlesBoxName;
   switch (category) {
     case NewsCategory.general:
-      articlesBoxName = 'generalArticles';
+      articlesBoxName = 'general';
 
     case NewsCategory.health:
-      articlesBoxName = 'healthArticles';
+      articlesBoxName = 'health';
 
     case NewsCategory.sports:
-      articlesBoxName = 'sportsArticles';
+      articlesBoxName = 'sports';
 
     case NewsCategory.technology:
-      articlesBoxName = 'technologyArticles';
+      articlesBoxName = 'technology';
 
     case NewsCategory.business:
-      articlesBoxName = 'businessArticles';
+      articlesBoxName = 'business';
 
     case NewsCategory.entertainment:
-      articlesBoxName = 'entertainmentArticles';
+      articlesBoxName = 'entertainment';
   }
   return articlesBoxName;
 }

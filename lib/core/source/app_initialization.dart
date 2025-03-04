@@ -7,7 +7,7 @@ import 'package:newzly/core/utils/newzly_bloc_observer.dart';
 
 Future<void> initializeApp() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: 'assets/.env');
+  await dotenv.load(fileName: '.env');
   await HiveHelper.initHive();
   initGetIt();
   Bloc.observer = NewzlyBlocObserver();

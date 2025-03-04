@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:newzly/core/models/errors/failure_model.dart';
@@ -9,14 +11,13 @@ import 'package:newzly/features/home/domain/entities/article_entity.dart';
 import 'package:newzly/features/home/domain/repositories/home_repo.dart';
 
 class HomeRepositoryImplementation extends HomeRepository {
-  final HomeRemoteDataSource _homeRemoteDataSource;
-  final HomeLocalDataSource _homeLocalDataSource;
+  final HomeRemoteDataSourceImplementation homeRemoteDataSource;
+  final HomeLocalDataSourceImplementation homeLocalDataSource;
 
   HomeRepositoryImplementation({
-    required HomeRemoteDataSource homeRemoteDataSource,
-    required HomeLocalDataSource homeLocalDataSource,
-  }) : _homeRemoteDataSource = homeRemoteDataSource,
-       _homeLocalDataSource = homeLocalDataSource;
+    required this.homeRemoteDataSource,
+    required this.homeLocalDataSource,
+  });
 
   @override
   Future<Either<Failure, List<ArticleEntity>>> fetchCategoryNews({
@@ -24,17 +25,17 @@ class HomeRepositoryImplementation extends HomeRepository {
   }) async {
     List<ArticleEntity> articlesList;
     try {
-      articlesList = _homeLocalDataSource.fetchCategoryNews(
-        category: NewsCategory.business,
-      );
+      articlesList = homeLocalDataSource.fetchCategoryNews(category: category);
       if (articlesList.isNotEmpty) {
         return right(articlesList);
       }
-      articlesList = await _homeRemoteDataSource.fetchCategoryNews(
-        category: NewsCategory.business,
+      articlesList = await homeRemoteDataSource.fetchCategoryNews(
+        category: category,
       );
       return right(articlesList);
     } catch (e) {
+      log(e.toString());
+
       if (e is DioException) {
         return left(NetworkFailureModel.fromDioError(e));
       } else {
