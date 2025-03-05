@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newzly/features/home/presentation/UI/views/sports_news_view/widgets/sports_news_list_view.dart';
-import 'package:newzly/features/home/presentation/manager/sports_news_cubit/sports_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/sports_news_cubit/sports_news_cubit.dart';
 
 class SportsNewsView extends StatefulWidget {
   const SportsNewsView({super.key});

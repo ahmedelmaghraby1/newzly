@@ -13,12 +13,12 @@ import 'package:newzly/features/home/domain/use_cases/fetch_general_news_use_cas
 import 'package:newzly/features/home/domain/use_cases/fetch_health_news_use_case.dart';
 import 'package:newzly/features/home/domain/use_cases/fetch_sports_news_use_case.dart';
 import 'package:newzly/features/home/domain/use_cases/fetch_technology_news_use_case.dart';
-import 'package:newzly/features/home/presentation/manager/business_news_cubit/business_news_cubit.dart';
-import 'package:newzly/features/home/presentation/manager/entertainment_news_cubit/entertainment_news_cubit.dart';
-import 'package:newzly/features/home/presentation/manager/general_news_cubit/general_news_cubit.dart';
-import 'package:newzly/features/home/presentation/manager/health_news_cubit/health_news_cubit.dart';
-import 'package:newzly/features/home/presentation/manager/sports_news_cubit/sports_news_cubit.dart';
-import 'package:newzly/features/home/presentation/manager/technology_news_cubit/technology_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/business_news_cubit/business_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/entertainment_news_cubit/entertainment_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/general_news_cubit/general_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/health_news_cubit/health_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/sports_news_cubit/sports_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/technology_news_cubit/technology_news_cubit.dart';
 
 GetIt getIt = GetIt.instance;
 String baseUrl =

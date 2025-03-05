@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newzly/core/constants/fonts.dart';
-import 'package:newzly/core/themes/colors.dart';
-import 'package:newzly/core/themes/styles.dart';
+import 'package:newzly/core/theme/theming_assets/colors.dart';
+import 'package:newzly/core/theme/theming_assets/styles.dart';
 
 class AppThemes {
   // Light Theme

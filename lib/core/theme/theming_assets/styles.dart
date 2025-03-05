@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newzly/core/themes/colors.dart';
+import 'package:newzly/core/theme/theming_assets/colors.dart';
 
 class AppTextStyles {
   // Light theme

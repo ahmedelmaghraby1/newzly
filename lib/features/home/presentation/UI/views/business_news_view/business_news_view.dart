@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newzly/features/home/presentation/UI/views/business_news_view/widgets/business_news_list_view.dart';
-import 'package:newzly/features/home/presentation/manager/business_news_cubit/business_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/business_news_cubit/business_news_cubit.dart';
 
 class BusinessNewsView extends StatefulWidget {
   const BusinessNewsView({super.key});

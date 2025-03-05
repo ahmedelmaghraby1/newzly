@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:newzly/core/injection/service_locator.dart';
+import 'package:newzly/core/injection/injector.dart';
 import 'package:newzly/core/utils/api_services.dart';
 
 class DioHelper extends ApiServices<Map<String, dynamic>> {

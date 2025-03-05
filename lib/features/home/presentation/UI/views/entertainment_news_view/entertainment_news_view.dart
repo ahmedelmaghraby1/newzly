@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newzly/features/home/presentation/UI/views/Entertainment_news_view/widgets/Entertainment_news_list_view.dart';
-import 'package:newzly/features/home/presentation/manager/entertainment_news_cubit/entertainment_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/entertainment_news_cubit/entertainment_news_cubit.dart';
 
 class EntertainmentNewsView extends StatefulWidget {
   const EntertainmentNewsView({super.key});

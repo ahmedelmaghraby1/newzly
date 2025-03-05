@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:newzly/core/injection/service_locator.dart';
+import 'package:newzly/core/injection/injector.dart';
 import 'package:newzly/core/utils/dio_helper.dart';
 import 'package:newzly/features/home/data/data_sources/home_local_data_source.dart';
 import 'package:newzly/features/home/data/data_sources/home_remote_data_source.dart';
@@ -16,12 +16,12 @@ import 'package:newzly/features/home/presentation/UI/views/general_news_view/gen
 import 'package:newzly/features/home/presentation/UI/views/health_news_view/health_news_view.dart';
 import 'package:newzly/features/home/presentation/UI/views/sports_news_view/sports_news_view.dart';
 import 'package:newzly/features/home/presentation/UI/views/technology_news_view/technology_news_view.dart';
-import 'package:newzly/features/home/presentation/manager/business_news_cubit/business_news_cubit.dart';
-import 'package:newzly/features/home/presentation/manager/entertainment_news_cubit/entertainment_news_cubit.dart';
-import 'package:newzly/features/home/presentation/manager/general_news_cubit/general_news_cubit.dart';
-import 'package:newzly/features/home/presentation/manager/health_news_cubit/health_news_cubit.dart';
-import 'package:newzly/features/home/presentation/manager/sports_news_cubit/sports_news_cubit.dart';
-import 'package:newzly/features/home/presentation/manager/technology_news_cubit/technology_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/business_news_cubit/business_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/entertainment_news_cubit/entertainment_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/general_news_cubit/general_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/health_news_cubit/health_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/sports_news_cubit/sports_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/technology_news_cubit/technology_news_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -70,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('newzly'),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
         bottom: TabBar(
           onTap: _onTabChanged,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newzly/features/home/presentation/UI/views/health_news_view/widgets/health_news_list_view.dart';
-import 'package:newzly/features/home/presentation/manager/health_news_cubit/health_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/health_news_cubit/health_news_cubit.dart';
 
 class HealthNewsView extends StatefulWidget {
   const HealthNewsView({super.key});

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:newzly/core/utils/enums.dart';
 import 'package:newzly/core/utils/get_category_name_from_enum.dart';
@@ -16,7 +17,7 @@ class HiveHelper {
       Hive.openBox<ArticleEntity>('technologyArticles'),
       Hive.openBox<ArticleEntity>('businessArticles'),
       Hive.openBox<ArticleEntity>('entertainmentArticles'),
-      // Hive.openBox<dynamic>('settings'),
+      Hive.openBox<dynamic>('settings'),
     ]);
   }
 
@@ -27,5 +28,9 @@ class HiveHelper {
     late final String categoryName = getCategoryName(category: category);
     late final String articlesBoxName = '${categoryName}Articles';
     Hive.box<ArticleEntity>(articlesBoxName).addAll(articles);
+  }
+
+  static ValueListenable<Box<dynamic>> settingsListenable() {
+    return Hive.box<dynamic>('settings').listenable();
   }
 }

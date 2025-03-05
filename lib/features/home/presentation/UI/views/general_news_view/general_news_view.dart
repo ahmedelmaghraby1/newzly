@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:newzly/features/home/presentation/manager/general_news_cubit/general_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/general_news_cubit/general_news_cubit.dart';
 import 'package:newzly/features/home/presentation/UI/views/general_news_view/widgets/general_news_list_view.dart';
 
 class GeneralNewsView extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newzly/features/home/presentation/UI/views/technology_news_view/widgets/technology_news_list_view.dart';
-import 'package:newzly/features/home/presentation/manager/technology_news_cubit/technology_news_cubit.dart';
+import 'package:newzly/features/home/presentation/controller/technology_news_cubit/technology_news_cubit.dart';
 
 class TechnologyNewsView extends StatefulWidget {
   const TechnologyNewsView({super.key});
