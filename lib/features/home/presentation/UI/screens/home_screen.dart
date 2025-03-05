@@ -1,6 +1,15 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newzly/core/injection/service_locator.dart';
+import 'package:newzly/core/utils/dio_helper.dart';
+import 'package:newzly/features/home/data/data_sources/home_local_data_source.dart';
+import 'package:newzly/features/home/data/data_sources/home_remote_data_source.dart';
+import 'package:newzly/features/home/data/repositories/home_repository_imp.dart';
+import 'package:newzly/features/home/domain/use_cases/fetch_Business_news_use_case.dart';
+import 'package:newzly/features/home/domain/use_cases/fetch_Entertainment_news_use_case.dart';
 import 'package:newzly/features/home/presentation/UI/views/business_news_view/business_news_view.dart';
 import 'package:newzly/features/home/presentation/UI/views/entertainment_news_view/entertainment_news_view.dart';
 import 'package:newzly/features/home/presentation/UI/views/general_news_view/general_news_view.dart';
@@ -100,13 +109,70 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           BlocProvider<EntertainmentNewsCubit>(
             create:
-                (context) =>
-                    getIt<EntertainmentNewsCubit>()..fetchEntertainmentNews(),
+                (context) => EntertainmentNewsCubit(
+                  fetchEntertainmentNewsUseCase: FetchEntertainmentNewsUseCase(
+                    HomeRepositoryImplementation(
+                      homeLocalDataSource: HomeLocalDataSourceImplementation(),
+                      homeRemoteDataSource: HomeRemoteDataSourceImplementation(
+                        dioHelper: DioHelper(
+                          Dio(
+                              BaseOptions(
+                                baseUrl: baseUrl,
+                                receiveDataWhenStatusError: true,
+                                connectTimeout: const Duration(seconds: 50),
+                                receiveTimeout: const Duration(seconds: 50),
+                              ),
+                            )
+                            ..interceptors.add(
+                              LogInterceptor(
+                                requestBody: true,
+                                error: true,
+                                requestHeader: true,
+                                responseHeader: false,
+                                request: true,
+                                responseBody: true,
+                                logPrint: (object) => log(object.toString()),
+                              ),
+                            ),
+                        ),
+                      ),
+                    ),
+                  ),
+                )..fetchEntertainmentNews(),
             child: EntertainmentNewsView(),
           ),
           BlocProvider<BusinessNewsCubit>(
             create:
-                (context) => getIt<BusinessNewsCubit>()..fetchBusinessNews(),
+                (context) => BusinessNewsCubit(
+                  fetchBusinessNewsUseCase: FetchBusinessNewsUseCase(
+                    HomeRepositoryImplementation(
+                      homeLocalDataSource: HomeLocalDataSourceImplementation(),
+                      homeRemoteDataSource: HomeRemoteDataSourceImplementation(
+                        dioHelper: DioHelper(
+                          Dio(
+                              BaseOptions(
+                                baseUrl: baseUrl,
+                                receiveDataWhenStatusError: true,
+                                connectTimeout: const Duration(seconds: 50),
+                                receiveTimeout: const Duration(seconds: 50),
+                              ),
+                            )
+                            ..interceptors.add(
+                              LogInterceptor(
+                                requestBody: true,
+                                error: true,
+                                requestHeader: true,
+                                responseHeader: false,
+                                request: true,
+                                responseBody: true,
+                                logPrint: (object) => log(object.toString()),
+                              ),
+                            ),
+                        ),
+                      ),
+                    ),
+                  ),
+                )..fetchBusinessNews(),
             child: BusinessNewsView(),
           ),
         ],

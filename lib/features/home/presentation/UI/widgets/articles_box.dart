@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newzly/features/home/domain/entities/article_entity.dart';
+import 'package:newzly/features/home/presentation/UI/screens/article_screen.dart';
 
 class ArticleBox extends StatelessWidget {
   final ArticleEntity article;
@@ -9,28 +10,33 @@ class ArticleBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      // height: 300.h,
-      child: Column(
-        spacing: 10.h,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15.r),
-            child: CachedNetworkImage(
-              imageUrl: article.articleUrlToImage ?? '',
-              // height: 180.h,
-              // width: 350.w,
-              // filterQuality: FilterQuality.high,
-              // fit: BoxFit.fitWidth,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ArticleScreen(url: article.articleUrl),
+          ),
+        );
+      },
+      child: SizedBox(
+        child: Column(
+          spacing: 10.h,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15.r),
+              child: CachedNetworkImage(
+                imageUrl: article.articleUrlToImage ?? '',
+              ),
             ),
-          ),
-          Row(children: [Text(article.articlAuthor)]),
-          Text(article.articleTitle, overflow: TextOverflow.visible),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [Text(article.articlePublishedAt)],
-          ),
-        ],
+            Row(children: [Text(article.articlAuthor)]),
+            Text(article.articleTitle, overflow: TextOverflow.visible),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [Text(article.articlePublishedAt)],
+            ),
+          ],
+        ),
       ),
     );
   }
