@@ -1,8 +1,10 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:newzly/features/home/domain/entities/article_entity.dart';
-import 'package:newzly/features/home/presentation/UI/screens/article_screen.dart';
 
 class ArticleBox extends StatelessWidget {
   final ArticleEntity article;
@@ -12,12 +14,8 @@ class ArticleBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ArticleScreen(url: article.articleUrl),
-          ),
-        );
+        log('/article/${article.articleUrl}');
+        context.go('/article/${article}');
       },
       child: SizedBox(
         child: Column(

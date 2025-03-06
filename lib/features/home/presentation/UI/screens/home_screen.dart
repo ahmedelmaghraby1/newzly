@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:newzly/core/injection/injector.dart';
+import 'package:newzly/core/routes/app_routes.dart';
 import 'package:newzly/core/utils/dio_helper.dart';
 import 'package:newzly/features/home/data/data_sources/home_local_data_source.dart';
 import 'package:newzly/features/home/data/data_sources/home_remote_data_source.dart';
@@ -71,7 +73,14 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       appBar: AppBar(
         title: Text('newzly'),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.push(AppRoutes.settingsScreen);
+            },
+            icon: Icon(Icons.settings),
+          ),
+        ],
         bottom: TabBar(
           onTap: _onTabChanged,
           controller: _tabController,

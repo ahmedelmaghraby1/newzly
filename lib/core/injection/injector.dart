@@ -3,6 +3,10 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+import 'package:newzly/core/localization/cubit/localization_cubit.dart';
+import 'package:newzly/core/routes/app_router.dart';
+import 'package:newzly/core/theme/cubit/theming_cubit.dart';
 import 'package:newzly/core/utils/dio_helper.dart';
 import 'package:newzly/features/home/data/data_sources/home_local_data_source.dart';
 import 'package:newzly/features/home/data/data_sources/home_remote_data_source.dart';
@@ -24,6 +28,7 @@ GetIt getIt = GetIt.instance;
 String baseUrl =
     dotenv.env['base_url'] ?? 'https://newsapi.org/v2/top-headlines?';
 String apiKey = dotenv.env['api_key'] ?? 'b928c8f387064fc98c047920c08c874e';
+GoRouter goRouter = AppRouter.createRouter();
 initGetIt() {
   // Dio
   getIt.registerLazySingleton<Dio>(
@@ -89,6 +94,8 @@ initGetIt() {
   );
 
   //Cubits
+  getIt.registerFactory<LocalizationCubit>(() => LocalizationCubit());
+  getIt.registerFactory<ThemingCubit>(() => ThemingCubit());
   getIt.registerFactory<GeneralNewsCubit>(
     () => GeneralNewsCubit(fetchGeneralNewsUseCase: getIt()),
   );
