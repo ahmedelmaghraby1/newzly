@@ -5,6 +5,7 @@ import 'package:newzly/features/home/domain/entities/article_entity.dart';
 
 abstract class HomeRepository {
   Future<Either<Failure, List<ArticleEntity>>> fetchCategoryNews({
+    int? page,
     required NewsCategory category,
   });
 }

@@ -11,9 +11,7 @@ abstract class ApiServices<Type> {
     CancelToken? cancelToken,
     int? timeOut,
     bool isMultipart = false,
-  }) {
-    return null;
-  }
+  });
 
   Future<Type>? patch({
     String? base,
@@ -25,9 +23,7 @@ abstract class ApiServices<Type> {
     CancelToken? cancelToken,
     int? timeOut,
     bool isMultipart = false,
-  }) {
-    return null;
-  }
+  });
 
   Future<Type>? put({
     String? base,
@@ -39,10 +35,7 @@ abstract class ApiServices<Type> {
     CancelToken? cancelToken,
     int? timeOut,
     bool isMultipart = false,
-  }) {
-    return null;
-  }
-
+  });
   Future<Type> get({
     String? base,
     required String endPoint,
@@ -63,7 +56,5 @@ abstract class ApiServices<Type> {
     CancelToken? cancelToken,
     int? timeOut,
     bool isMultipart = false,
-  }) {
-    return null;
-  }
+  });
 }

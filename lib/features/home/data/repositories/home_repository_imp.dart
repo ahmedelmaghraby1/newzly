@@ -11,8 +11,8 @@ import 'package:newzly/features/home/domain/entities/article_entity.dart';
 import 'package:newzly/features/home/domain/repositories/home_repo.dart';
 
 class HomeRepositoryImplementation extends HomeRepository {
-  final HomeRemoteDataSourceImplementation homeRemoteDataSource;
-  final HomeLocalDataSourceImplementation homeLocalDataSource;
+  final HomeRemoteDataSource homeRemoteDataSource;
+  final HomeLocalDataSource homeLocalDataSource;
 
   HomeRepositoryImplementation({
     required this.homeRemoteDataSource,
@@ -21,6 +21,7 @@ class HomeRepositoryImplementation extends HomeRepository {
 
   @override
   Future<Either<Failure, List<ArticleEntity>>> fetchCategoryNews({
+    int? page,
     required NewsCategory category,
   }) async {
     List<ArticleEntity> articlesList;
@@ -30,6 +31,7 @@ class HomeRepositoryImplementation extends HomeRepository {
         return right(articlesList);
       }
       articlesList = await homeRemoteDataSource.fetchCategoryNews(
+        page: page ?? 0,
         category: category,
       );
       return right(articlesList);
