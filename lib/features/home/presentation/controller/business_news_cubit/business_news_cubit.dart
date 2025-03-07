@@ -9,13 +9,23 @@ class BusinessNewsCubit extends Cubit<BusinessNewsState> {
   final FetchBusinessNewsUseCase fetchBusinessNewsUseCase;
   BusinessNewsCubit({required this.fetchBusinessNewsUseCase})
     : super(BusinessNewsInitial());
-  Future<void> fetchBusinessNews() async {
-    emit(BusinessNewsLoading());
-    Either<Failure, List<ArticleEntity>> result =
-        await fetchBusinessNewsUseCase.call();
+  Future<void> fetchBusinessNews({int page = 0}) async {
+    if (page == 0) {
+      emit(BusinessNewsLoading());
+    } else {
+      emit(BusinessNewsPaginationLoading());
+    }
+    Either<Failure, List<ArticleEntity>> result = await fetchBusinessNewsUseCase
+        .call(page);
     result.fold(
       (failure) {
-        emit(BusinessNewsFailure(errorMessage: failure.errorMessage));
+        if (page == 0) {
+          emit(BusinessNewsFailure(errorMessage: failure.errorMessage));
+        } else {
+          emit(
+            BusinessNewsPaginationFailure(errorMessage: failure.errorMessage),
+          );
+        }
       },
       (articles) {
         emit(BusinessNewsLoaded(articles: articles));

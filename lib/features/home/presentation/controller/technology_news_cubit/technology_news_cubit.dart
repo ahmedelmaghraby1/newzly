@@ -9,13 +9,23 @@ class TechnologyNewsCubit extends Cubit<TechnologyNewsState> {
   final FetchTechnologyNewsUseCase fetchTechnologyNewsUseCase;
   TechnologyNewsCubit({required this.fetchTechnologyNewsUseCase})
     : super(TechnologyNewsInitial());
-  Future<void> fetchTechnologyNews() async {
-    emit(TechnologyNewsLoading());
+  Future<void> fetchTechnologyNews({int page = 0}) async {
+    if (page == 0) {
+      emit(TechnologyNewsLoading());
+    } else {
+      emit(TechnologyNewsPaginationLoading());
+    }
     Either<Failure, List<ArticleEntity>> result =
-        await fetchTechnologyNewsUseCase.call();
+        await fetchTechnologyNewsUseCase.call(page);
     result.fold(
       (failure) {
-        emit(TechnologyNewsFailure(errorMessage: failure.errorMessage));
+        if (page == 0) {
+          emit(TechnologyNewsFailure(errorMessage: failure.errorMessage));
+        } else {
+          emit(
+            TechnologyNewsPaginationFailure(errorMessage: failure.errorMessage),
+          );
+        }
       },
       (articles) {
         emit(TechnologyNewsLoaded(articles: articles));

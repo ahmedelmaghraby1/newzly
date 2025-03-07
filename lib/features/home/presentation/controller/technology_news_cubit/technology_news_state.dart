@@ -6,6 +6,8 @@ final class TechnologyNewsInitial extends TechnologyNewsState {}
 
 final class TechnologyNewsLoading extends TechnologyNewsState {}
 
+final class TechnologyNewsPaginationLoading extends TechnologyNewsState {}
+
 final class TechnologyNewsLoaded extends TechnologyNewsState {
   final List<ArticleEntity> articles;
   TechnologyNewsLoaded({required this.articles});
@@ -14,4 +16,9 @@ final class TechnologyNewsLoaded extends TechnologyNewsState {
 final class TechnologyNewsFailure extends TechnologyNewsState {
   final String errorMessage;
   TechnologyNewsFailure({required this.errorMessage});
+}
+
+final class TechnologyNewsPaginationFailure extends TechnologyNewsState {
+  final String errorMessage;
+  TechnologyNewsPaginationFailure({required this.errorMessage});
 }

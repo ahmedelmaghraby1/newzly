@@ -9,13 +9,21 @@ class HealthNewsCubit extends Cubit<HealthNewsState> {
   final FetchHealthNewsUseCase fetchHealthNewsUseCase;
   HealthNewsCubit({required this.fetchHealthNewsUseCase})
     : super(HealthNewsInitial());
-  Future<void> fetchHealthNews() async {
-    emit(HealthNewsLoading());
-    Either<Failure, List<ArticleEntity>> result =
-        await fetchHealthNewsUseCase.call();
+  Future<void> fetchHealthNews({int page = 0}) async {
+    if (page == 0) {
+      emit(HealthNewsLoading());
+    } else {
+      emit(HealthNewsPaginationLoading());
+    }
+    Either<Failure, List<ArticleEntity>> result = await fetchHealthNewsUseCase
+        .call(page);
     result.fold(
       (failure) {
-        emit(HealthNewsFailure(errorMessage: failure.errorMessage));
+        if (page == 0) {
+          emit(HealthNewsFailure(errorMessage: failure.errorMessage));
+        } else {
+          emit(HealthNewsPaginationFailure(errorMessage: failure.errorMessage));
+        }
       },
       (articles) {
         emit(HealthNewsLoaded(articles: articles));

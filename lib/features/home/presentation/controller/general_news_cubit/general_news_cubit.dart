@@ -9,13 +9,23 @@ class GeneralNewsCubit extends Cubit<GeneralNewsState> {
   final FetchGeneralNewsUseCase fetchGeneralNewsUseCase;
   GeneralNewsCubit({required this.fetchGeneralNewsUseCase})
     : super(GeneralNewsInitial());
-  Future<void> fetchGeneralNews() async {
-    emit(GeneralNewsLoading());
-    Either<Failure, List<ArticleEntity>> result =
-        await fetchGeneralNewsUseCase.call();
+  Future<void> fetchGeneralNews({int page = 0}) async {
+    if (page == 0) {
+      emit(GeneralNewsLoading());
+    } else {
+      emit(GeneralNewsPaginationLoading());
+    }
+    Either<Failure, List<ArticleEntity>> result = await fetchGeneralNewsUseCase
+        .call(page);
     result.fold(
       (failure) {
-        emit(GeneralNewsFailure(errorMessage: failure.errorMessage));
+        if (page == 0) {
+          emit(GeneralNewsFailure(errorMessage: failure.errorMessage));
+        } else {
+          emit(
+            GeneralNewsPaginationFailure(errorMessage: failure.errorMessage),
+          );
+        }
       },
       (articles) {
         emit(GeneralNewsLoaded(articles: articles));

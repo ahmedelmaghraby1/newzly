@@ -6,7 +6,6 @@ import 'package:newzly/core/routes/app_router.dart';
 import 'package:newzly/core/theme/cubit/theming_cubit.dart';
 import 'package:newzly/core/utils/api_services.dart';
 import 'package:newzly/core/utils/dio_helper.dart';
-import 'package:newzly/features/home/data/data_sources/home_local_data_source.dart';
 import 'package:newzly/features/home/data/data_sources/home_remote_data_source.dart';
 import 'package:newzly/features/home/data/repositories/home_repository_imp.dart';
 import 'package:newzly/features/home/domain/repositories/home_repo.dart';
@@ -38,29 +37,12 @@ initGetIt() {
     () => HomeRemoteDataSourceImplementation(dioHelper: getIt()),
   );
 
-  //Local data sources
-  getIt.registerLazySingleton<HomeLocalDataSource>(
-    () => HomeLocalDataSourceImplementation(),
-  );
   // Repositories
   getIt.registerLazySingleton<HomeRepository>(
-    () => HomeRepositoryImplementation(
-      homeRemoteDataSource: getIt(),
-      homeLocalDataSource: getIt(),
-    ),
+    () => HomeRepositoryImplementation(homeRemoteDataSource: getIt()),
   );
 
   // Use cases
-  getIt.registerLazySingleton<FetchGeneralNewsUseCase>(
-    () => FetchGeneralNewsUseCase(getIt()),
-  );
-  getIt.registerLazySingleton<FetchHealthNewsUseCase>(
-    () => FetchHealthNewsUseCase(getIt()),
-  );
-  getIt.registerLazySingleton<FetchSportsNewsUseCase>(
-    () => FetchSportsNewsUseCase(getIt()),
-  );
-
   getIt.registerLazySingleton<FetchTechnologyNewsUseCase>(
     () => FetchTechnologyNewsUseCase(getIt()),
   );
@@ -69,6 +51,16 @@ initGetIt() {
   );
   getIt.registerLazySingleton<FetchBusinessNewsUseCase>(
     () => FetchBusinessNewsUseCase(getIt()),
+  );
+
+  getIt.registerLazySingleton<FetchGeneralNewsUseCase>(
+    () => FetchGeneralNewsUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<FetchHealthNewsUseCase>(
+    () => FetchHealthNewsUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<FetchSportsNewsUseCase>(
+    () => FetchSportsNewsUseCase(getIt()),
   );
 
   //Cubits

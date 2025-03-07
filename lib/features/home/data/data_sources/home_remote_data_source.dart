@@ -1,7 +1,6 @@
 import 'package:newzly/core/utils/api_services.dart';
 import 'package:newzly/core/utils/enums.dart';
 import 'package:newzly/core/utils/get_category_name_from_enum.dart';
-import 'package:newzly/core/utils/hive_helper.dart';
 import 'package:newzly/features/home/data/models/article_model/article_model.dart';
 import 'package:newzly/features/home/domain/entities/article_entity.dart';
 
@@ -39,7 +38,6 @@ class HomeRemoteDataSourceImplementation extends HomeRemoteDataSource {
       query: {'pageSize': pageSize, 'page': page},
     );
     late List<ArticleEntity> articles = getRemoteArticlesList(data: data);
-    HiveHelper.saveArticles(category: category, articles: articles);
     return articles;
   }
 }

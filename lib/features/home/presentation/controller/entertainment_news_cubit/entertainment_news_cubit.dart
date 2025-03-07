@@ -9,13 +9,25 @@ class EntertainmentNewsCubit extends Cubit<EntertainmentNewsState> {
   final FetchEntertainmentNewsUseCase fetchEntertainmentNewsUseCase;
   EntertainmentNewsCubit({required this.fetchEntertainmentNewsUseCase})
     : super(EntertainmentNewsInitial());
-  Future<void> fetchEntertainmentNews() async {
-    emit(EntertainmentNewsLoading());
+  Future<void> fetchEntertainmentNews({int page = 0}) async {
+    if (page == 0) {
+      emit(EntertainmentNewsLoading());
+    } else {
+      emit(EntertainmentNewsPaginationLoading());
+    }
     Either<Failure, List<ArticleEntity>> result =
-        await fetchEntertainmentNewsUseCase.call();
+        await fetchEntertainmentNewsUseCase.call(page);
     result.fold(
       (failure) {
-        emit(EntertainmentNewsFailure(errorMessage: failure.errorMessage));
+        if (page == 0) {
+          emit(EntertainmentNewsFailure(errorMessage: failure.errorMessage));
+        } else {
+          emit(
+            EntertainmentNewsPaginationFailure(
+              errorMessage: failure.errorMessage,
+            ),
+          );
+        }
       },
       (articles) {
         emit(EntertainmentNewsLoaded(articles: articles));
