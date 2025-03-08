@@ -83,6 +83,8 @@ class _SportsNewsViewState extends State<SportsNewsView>
                         state is SportsNewsPaginationLoading ||
                         state is SportsNewsPaginationFailure)
                     ? RefreshIndicator.adaptive(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                       onRefresh: _onRefresh,
                       child: SportsNewsListView(articles: articles),
                     )

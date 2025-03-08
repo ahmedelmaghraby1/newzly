@@ -85,6 +85,8 @@ class _TechnologyNewsViewState extends State<TechnologyNewsView>
                         state is TechnologyNewsPaginationLoading ||
                         state is TechnologyNewsPaginationFailure)
                     ? RefreshIndicator.adaptive(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                       onRefresh: _onRefresh,
                       child: TechnologyNewsListView(articles: articles),
                     )

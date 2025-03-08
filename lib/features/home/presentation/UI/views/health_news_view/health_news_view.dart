@@ -83,6 +83,8 @@ class _HealthNewsViewState extends State<HealthNewsView>
                         state is HealthNewsPaginationLoading ||
                         state is HealthNewsPaginationFailure)
                     ? RefreshIndicator.adaptive(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                       onRefresh: _onRefresh,
                       child: HealthNewsListView(
                         articles: articles,

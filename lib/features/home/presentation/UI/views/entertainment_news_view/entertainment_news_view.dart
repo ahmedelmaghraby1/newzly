@@ -85,6 +85,8 @@ class _EntertainmentNewsViewState extends State<EntertainmentNewsView>
                         state is EntertainmentNewsPaginationLoading ||
                         state is EntertainmentNewsPaginationFailure)
                     ? RefreshIndicator.adaptive(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                       onRefresh: _onRefresh,
                       child: EntertainmentNewsListView(articles: articles),
                     )

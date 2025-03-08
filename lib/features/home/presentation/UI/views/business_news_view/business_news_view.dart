@@ -85,6 +85,8 @@ class _BusinessNewsViewState extends State<BusinessNewsView>
                         state is BusinessNewsPaginationLoading ||
                         state is BusinessNewsPaginationFailure)
                     ? RefreshIndicator.adaptive(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                       onRefresh: _onRefresh,
                       child: BusinessNewsListView(
                         articles: articles,

@@ -84,6 +84,8 @@ class _GeneralNewsViewState extends State<GeneralNewsView>
                         state is GeneralNewsPaginationLoading ||
                         state is GeneralNewsPaginationFailure)
                     ? RefreshIndicator.adaptive(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                       onRefresh: _onRefresh,
                       child: GeneralNewsListView(
                         articles: articles,
