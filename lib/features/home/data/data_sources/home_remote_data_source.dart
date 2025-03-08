@@ -24,7 +24,7 @@ abstract class HomeRemoteDataSource {
 class HomeRemoteDataSourceImplementation extends HomeRemoteDataSource {
   final DioHelper dioHelper;
   final String endPoint = 'top-headlines?';
-  final int pageSize = 10;
+  final int pageSize = 20;
   HomeRemoteDataSourceImplementation({required this.dioHelper});
 
   @override

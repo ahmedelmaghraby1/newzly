@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newzly/core/localization/app_localization.dart';
 import 'package:newzly/core/utils/show_snack_bar.dart';
 import 'package:newzly/features/home/domain/entities/article_entity.dart';
 import 'package:newzly/features/home/presentation/UI/views/technology_news_view/widgets/technology_news_list_view.dart';
@@ -70,12 +71,12 @@ class _TechnologyNewsViewState extends State<TechnologyNewsView>
             if (newArticlesCount == oldArticlesCount) {
               _isLoading = true;
             }
-            print(
-              'old count is $oldArticlesCount , annd new count is $newArticlesCount',
-            );
           }
           if (state is TechnologyNewsPaginationFailure) {
-            showErrorSnackBar(context: context, message: state.errorMessage);
+            showErrorSnackBar(
+              context: context,
+              message: (state.errorMessage).tr(context),
+            );
           }
         },
         builder:
@@ -90,8 +91,8 @@ class _TechnologyNewsViewState extends State<TechnologyNewsView>
                     : state is TechnologyNewsLoading
                     ? CircularProgressIndicator()
                     : state is TechnologyNewsFailure
-                    ? Text(state.errorMessage)
-                    : Text('data'),
+                    ? Text((state.errorMessage).tr(context))
+                    : Text('data'.tr(context)),
       ),
     );
   }

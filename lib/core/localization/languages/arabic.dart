@@ -17,4 +17,14 @@ Map<String, String> arabic = {
   'weeks_ago': 'منذ {count} أسبوع',
   'months_ago': 'منذ {count} شهر',
   'years_ago': 'منذ {count} سنة',
+  // Errors
+  'connectionTimeOut': 'إنتهاء وقت الإتصال',
+  'sendTimeOut': 'إنتهاء وقت الإرسال',
+  'recieveTimeOut': 'إنتهاء وقت الإستقبال',
+  'badCertificate': 'شهادة خاطئة',
+  'requestCancelled': 'إلغاء الطلب',
+  'noInternetConnection': 'لا يوجد إتصال بالإنترنت',
+  'ops': 'أوبس حدث خطأ ما ، حاول لاحقا',
+  'serverNotFound': 'فشل العثور على الخادم',
+  'error': 'هنالك مشكلة ، حاول مرة اخرى',
 };

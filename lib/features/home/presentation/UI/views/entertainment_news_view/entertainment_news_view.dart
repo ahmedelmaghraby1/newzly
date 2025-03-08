@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newzly/core/localization/app_localization.dart';
 import 'package:newzly/core/utils/show_snack_bar.dart';
 import 'package:newzly/features/home/domain/entities/article_entity.dart';
 import 'package:newzly/features/home/presentation/UI/views/Entertainment_news_view/widgets/Entertainment_news_list_view.dart';
@@ -70,12 +71,12 @@ class _EntertainmentNewsViewState extends State<EntertainmentNewsView>
             if (newArticlesCount == oldArticlesCount) {
               _isLoading = true;
             }
-            print(
-              'old count is $oldArticlesCount , annd new count is $newArticlesCount',
-            );
           }
           if (state is EntertainmentNewsPaginationFailure) {
-            showErrorSnackBar(context: context, message: state.errorMessage);
+            showErrorSnackBar(
+              context: context,
+              message: (state.errorMessage).tr(context),
+            );
           }
         },
         builder:
@@ -90,8 +91,8 @@ class _EntertainmentNewsViewState extends State<EntertainmentNewsView>
                     : state is EntertainmentNewsLoading
                     ? CircularProgressIndicator()
                     : state is EntertainmentNewsFailure
-                    ? Text(state.errorMessage)
-                    : Text('data'),
+                    ? Text((state.errorMessage).tr(context))
+                    : Text('error'.tr(context)),
       ),
     );
   }

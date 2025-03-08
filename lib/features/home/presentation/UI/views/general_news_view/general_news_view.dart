@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newzly/core/localization/app_localization.dart';
 import 'package:newzly/core/utils/show_snack_bar.dart';
 import 'package:newzly/features/home/domain/entities/article_entity.dart';
 import 'package:newzly/features/home/presentation/controller/general_news_cubit/general_news_cubit.dart';
@@ -68,12 +69,12 @@ class _GeneralNewsViewState extends State<GeneralNewsView>
             if (newArticlesCount == oldArticlesCount) {
               _isLoading = true;
             }
-            print(
-              'old count is $oldArticlesCount , annd new count is $newArticlesCount',
-            );
           }
           if (state is GeneralNewsPaginationFailure) {
-            showErrorSnackBar(context: context, message: state.errorMessage);
+            showErrorSnackBar(
+              context: context,
+              message: (state.errorMessage).tr(context),
+            );
           }
         },
 
@@ -92,8 +93,8 @@ class _GeneralNewsViewState extends State<GeneralNewsView>
                     : state is GeneralNewsLoading
                     ? CircularProgressIndicator()
                     : state is GeneralNewsFailure
-                    ? Text(state.errorMessage)
-                    : Text('data'),
+                    ? Text((state.errorMessage).tr(context))
+                    : Text('data'.tr(context)),
       ),
     );
   }
