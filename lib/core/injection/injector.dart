@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:newzly/core/localization/cubit/localization_cubit.dart';
 import 'package:newzly/core/routes/app_router.dart';
 import 'package:newzly/core/theme/cubit/theming_cubit.dart';
-import 'package:newzly/core/utils/api_services.dart';
 import 'package:newzly/core/utils/dio_helper.dart';
 import 'package:newzly/features/home/data/data_sources/home_remote_data_source.dart';
 import 'package:newzly/features/home/data/repositories/home_repository_imp.dart';
@@ -23,14 +22,13 @@ import 'package:newzly/features/home/presentation/controller/sports_news_cubit/s
 import 'package:newzly/features/home/presentation/controller/technology_news_cubit/technology_news_cubit.dart';
 
 GetIt getIt = GetIt.instance;
+GetIt sl = GetIt.instance;
 String baseUrl = dotenv.env['base_url'] ?? 'https://newsapi.org/v2/';
 String apiKey = dotenv.env['api_key'] ?? 'b928c8f387064fc98c047920c08c874e';
 GoRouter goRouter = AppRouter.createRouter();
 initGetIt() {
   // Dio
-  getIt.registerLazySingleton<ApiServices<Map<String, dynamic>>>(
-    () => DioHelper(),
-  );
+  getIt.registerLazySingleton<DioHelper>(() => DioHelper());
 
   //Remote data sources
   getIt.registerLazySingleton<HomeRemoteDataSource>(
@@ -43,15 +41,6 @@ initGetIt() {
   );
 
   // Use cases
-  getIt.registerLazySingleton<FetchTechnologyNewsUseCase>(
-    () => FetchTechnologyNewsUseCase(getIt()),
-  );
-  getIt.registerLazySingleton<FetchEntertainmentNewsUseCase>(
-    () => FetchEntertainmentNewsUseCase(getIt()),
-  );
-  getIt.registerLazySingleton<FetchBusinessNewsUseCase>(
-    () => FetchBusinessNewsUseCase(getIt()),
-  );
 
   getIt.registerLazySingleton<FetchGeneralNewsUseCase>(
     () => FetchGeneralNewsUseCase(getIt()),
@@ -62,7 +51,21 @@ initGetIt() {
   getIt.registerLazySingleton<FetchSportsNewsUseCase>(
     () => FetchSportsNewsUseCase(getIt()),
   );
-
+  getIt.registerLazySingleton<FetchTechnologyNewsUseCase>(
+    () => FetchTechnologyNewsUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<FetchEntertainmentNewsUseCase>(
+    () => FetchEntertainmentNewsUseCase(getIt()),
+  );
+  getIt.registerLazySingleton<FetchBusinessNewsUseCase>(
+    () => FetchBusinessNewsUseCase(getIt()),
+  );
+  // sl.registerLazySingleton<FetchEntertainmentNewsUseCase>(
+  //   () => FetchEntertainmentNewsUseCase(getIt()),
+  // );
+  // sl.registerLazySingleton<FetchBusinessNewsUseCase>(
+  //   () => FetchBusinessNewsUseCase(getIt()),
+  // );
   //Cubits
   getIt.registerFactory<LocalizationCubit>(() => LocalizationCubit());
   getIt.registerFactory<ThemingCubit>(() => ThemingCubit());

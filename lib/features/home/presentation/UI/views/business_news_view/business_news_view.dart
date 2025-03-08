@@ -43,6 +43,12 @@ class _BusinessNewsViewState extends State<BusinessNewsView>
     }
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   Future<void> _onRefresh() async {
     articles.clear();
     _pageNumber = 1;
@@ -58,7 +64,15 @@ class _BusinessNewsViewState extends State<BusinessNewsView>
       child: BlocConsumer<BusinessNewsCubit, BusinessNewsState>(
         listener: (context, state) {
           if (state is BusinessNewsLoaded) {
+            int oldArticlesCount = articles.length;
             articles.addAll(state.articles);
+            int newArticlesCount = articles.length;
+            if (newArticlesCount == oldArticlesCount) {
+              _isLoading = true;
+            }
+            print(
+              'old count is $oldArticlesCount , annd new count is $newArticlesCount',
+            );
           }
           if (state is BusinessNewsPaginationFailure) {
             showErrorSnackBar(context: context, message: state.errorMessage);

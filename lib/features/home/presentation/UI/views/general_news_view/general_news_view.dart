@@ -43,6 +43,12 @@ class _GeneralNewsViewState extends State<GeneralNewsView>
     }
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   Future<void> _onRefresh() async {
     articles.clear();
     _pageNumber = 1;
@@ -56,7 +62,15 @@ class _GeneralNewsViewState extends State<GeneralNewsView>
       child: BlocConsumer<GeneralNewsCubit, GeneralNewsState>(
         listener: (context, state) {
           if (state is GeneralNewsLoaded) {
+            int oldArticlesCount = articles.length;
             articles.addAll(state.articles);
+            int newArticlesCount = articles.length;
+            if (newArticlesCount == oldArticlesCount) {
+              _isLoading = true;
+            }
+            print(
+              'old count is $oldArticlesCount , annd new count is $newArticlesCount',
+            );
           }
           if (state is GeneralNewsPaginationFailure) {
             showErrorSnackBar(context: context, message: state.errorMessage);

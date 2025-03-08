@@ -21,8 +21,16 @@ class AppLocalization {
 
   static List<String> languages() => _localizedValues.keys.toList();
 
-  String getString(String text) =>
-      _localizedValues[locale.languageCode]![text] ?? text;
+  String getString(String text, {Map<String, String>? parameters}) {
+    String value = _localizedValues[locale.languageCode]![text] ?? text;
+
+    if (parameters != null) {
+      parameters.forEach((key, replacement) {
+        value = value.replaceAll('{$key}', replacement);
+      });
+    }
+    return value;
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
@@ -42,6 +50,6 @@ class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
 }
 
 extension LocalizationExtension on String {
-  String tr(BuildContext context) =>
-      AppLocalization.of(context).getString(this);
+  String tr(BuildContext context, {Map<String, String>? parameters}) =>
+      AppLocalization.of(context).getString(this, parameters: parameters);
 }

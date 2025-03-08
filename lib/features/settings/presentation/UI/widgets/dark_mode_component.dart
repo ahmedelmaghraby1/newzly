@@ -25,7 +25,7 @@ class DarkModeComponent extends StatelessWidget {
               child: SwitchListTile.adaptive(
                 title: Text(
                   'darkMode'.tr(context),
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 value: ThemingCubit.get(context).darkMode,
                 onChanged: (value) {

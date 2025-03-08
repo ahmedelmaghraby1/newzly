@@ -43,6 +43,12 @@ class _HealthNewsViewState extends State<HealthNewsView>
     }
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   Future<void> _onRefresh() async {
     articles.clear();
     _pageNumber = 1;
@@ -56,7 +62,15 @@ class _HealthNewsViewState extends State<HealthNewsView>
       child: BlocConsumer<HealthNewsCubit, HealthNewsState>(
         listener: (context, state) {
           if (state is HealthNewsLoaded) {
+            int oldArticlesCount = articles.length;
             articles.addAll(state.articles);
+            int newArticlesCount = articles.length;
+            if (newArticlesCount == oldArticlesCount) {
+              _isLoading = true;
+            }
+            print(
+              'old count is $oldArticlesCount , annd new count is $newArticlesCount',
+            );
           }
           if (state is HealthNewsPaginationFailure) {
             showErrorSnackBar(context: context, message: state.errorMessage);

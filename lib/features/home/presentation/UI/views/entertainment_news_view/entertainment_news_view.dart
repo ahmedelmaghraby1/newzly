@@ -43,6 +43,12 @@ class _EntertainmentNewsViewState extends State<EntertainmentNewsView>
     }
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   Future<void> _onRefresh() async {
     articles.clear();
     _pageNumber = 1;
@@ -58,7 +64,15 @@ class _EntertainmentNewsViewState extends State<EntertainmentNewsView>
       child: BlocConsumer<EntertainmentNewsCubit, EntertainmentNewsState>(
         listener: (context, state) {
           if (state is EntertainmentNewsLoaded) {
+            int oldArticlesCount = articles.length;
             articles.addAll(state.articles);
+            int newArticlesCount = articles.length;
+            if (newArticlesCount == oldArticlesCount) {
+              _isLoading = true;
+            }
+            print(
+              'old count is $oldArticlesCount , annd new count is $newArticlesCount',
+            );
           }
           if (state is EntertainmentNewsPaginationFailure) {
             showErrorSnackBar(context: context, message: state.errorMessage);

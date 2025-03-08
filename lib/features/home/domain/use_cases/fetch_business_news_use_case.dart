@@ -6,12 +6,12 @@ import 'package:newzly/features/home/domain/entities/article_entity.dart';
 import 'package:newzly/features/home/domain/repositories/home_repo.dart';
 
 class FetchBusinessNewsUseCase extends UseCase<List<ArticleEntity>, int> {
-  final HomeRepository _homeRepositoryHomeRepository;
-  FetchBusinessNewsUseCase(this._homeRepositoryHomeRepository);
+  final HomeRepository _homeRepository;
+  FetchBusinessNewsUseCase(this._homeRepository);
 
   @override
   Future<Either<Failure, List<ArticleEntity>>> call([int? page]) {
-    return _homeRepositoryHomeRepository.fetchCategoryNews(
+    return _homeRepository.fetchCategoryNews(
       category: NewsCategory.business,
       page: page,
     );

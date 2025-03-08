@@ -1,1 +1,20 @@
-Map<String, String> arabic = {};
+Map<String, String> arabic = {
+  'newzly': 'أخباري',
+  'general': 'عامة',
+  'health': 'الصحة',
+  'sports': 'الرياضة',
+  'technology': 'التقنية',
+  'entertainment': 'الترفيه',
+  'business': 'الإقتصاد',
+  'settings': 'الإعدادات',
+  'theme': 'الوضع',
+  'darkMode': 'الوضع الليلي',
+  'appLanguage': 'لغة التطبيق',
+  'moment_ago': 'منذ لحظات',
+  'minutes_ago': 'منذ {count} دقيقة',
+  'hours_ago': 'منذ {count} ساعة',
+  'days_ago': 'منذ {count} يوم',
+  'weeks_ago': 'منذ {count} أسبوع',
+  'months_ago': 'منذ {count} شهر',
+  'years_ago': 'منذ {count} سنة',
+};

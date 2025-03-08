@@ -52,13 +52,27 @@ class _TechnologyNewsViewState extends State<TechnologyNewsView>
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     return Center(
       child: BlocConsumer<TechnologyNewsCubit, TechnologyNewsState>(
         listener: (context, state) {
           if (state is TechnologyNewsLoaded) {
+            int oldArticlesCount = articles.length;
             articles.addAll(state.articles);
+            int newArticlesCount = articles.length;
+            if (newArticlesCount == oldArticlesCount) {
+              _isLoading = true;
+            }
+            print(
+              'old count is $oldArticlesCount , annd new count is $newArticlesCount',
+            );
           }
           if (state is TechnologyNewsPaginationFailure) {
             showErrorSnackBar(context: context, message: state.errorMessage);

@@ -1,4 +1,4 @@
-import 'package:newzly/core/utils/api_services.dart';
+import 'package:newzly/core/utils/dio_helper.dart';
 import 'package:newzly/core/utils/enums.dart';
 import 'package:newzly/core/utils/get_category_name_from_enum.dart';
 import 'package:newzly/features/home/data/models/article_model/article_model.dart';
@@ -22,7 +22,7 @@ abstract class HomeRemoteDataSource {
 }
 
 class HomeRemoteDataSourceImplementation extends HomeRemoteDataSource {
-  final ApiServices<Map<String, dynamic>> dioHelper;
+  final DioHelper dioHelper;
   final String endPoint = 'top-headlines?';
   final int pageSize = 10;
   HomeRemoteDataSourceImplementation({required this.dioHelper});

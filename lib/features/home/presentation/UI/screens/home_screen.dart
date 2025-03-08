@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:newzly/core/injection/injector.dart';
+import 'package:newzly/core/localization/app_localization.dart';
 import 'package:newzly/core/routes/app_routes.dart';
 import 'package:newzly/features/home/presentation/UI/views/business_news_view/business_news_view.dart';
 import 'package:newzly/features/home/presentation/UI/views/entertainment_news_view/entertainment_news_view.dart';
@@ -63,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('newzly'),
+        title: Text('newzly'.tr(context)),
         actions: [
           IconButton(
             onPressed: () {
@@ -73,15 +74,16 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ],
         bottom: TabBar(
+          isScrollable: true,
           onTap: _onTabChanged,
           controller: _tabController,
           tabs: [
-            Tab(text: 'general'),
-            Tab(text: 'health'),
-            Tab(text: 'sports'),
-            Tab(text: 'technology'),
-            Tab(text: 'entertainment'),
-            Tab(text: 'business'),
+            Tab(text: 'general'.tr(context)),
+            Tab(text: 'health'.tr(context)),
+            Tab(text: 'sports'.tr(context)),
+            Tab(text: 'technology'.tr(context)),
+            Tab(text: 'entertainment'.tr(context)),
+            Tab(text: 'business'.tr(context)),
           ],
         ),
       ),

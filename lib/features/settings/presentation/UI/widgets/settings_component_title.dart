@@ -11,10 +11,10 @@ class SettingsComponentTitle extends StatelessWidget {
     return Row(
       children: [
         Padding(
-          padding: EdgeInsetsDirectional.only(start: 30.w),
+          padding: EdgeInsetsDirectional.only(start: 15.w),
           child: Text(
             title.tr(context),
-            style: Theme.of(context).textTheme.bodyMedium!,
+            style: Theme.of(context).textTheme.bodyLarge!,
           ),
         ),
       ],
