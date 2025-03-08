@@ -60,12 +60,7 @@ initGetIt() {
   getIt.registerLazySingleton<FetchBusinessNewsUseCase>(
     () => FetchBusinessNewsUseCase(getIt()),
   );
-  // sl.registerLazySingleton<FetchEntertainmentNewsUseCase>(
-  //   () => FetchEntertainmentNewsUseCase(getIt()),
-  // );
-  // sl.registerLazySingleton<FetchBusinessNewsUseCase>(
-  //   () => FetchBusinessNewsUseCase(getIt()),
-  // );
+
   //Cubits
   getIt.registerFactory<LocalizationCubit>(() => LocalizationCubit());
   getIt.registerFactory<ThemingCubit>(() => ThemingCubit());
@@ -82,7 +77,9 @@ initGetIt() {
     () => TechnologyNewsCubit(fetchTechnologyNewsUseCase: getIt()),
   );
   getIt.registerFactory<EntertainmentNewsCubit>(
-    () => EntertainmentNewsCubit(fetchEntertainmentNewsUseCase: getIt()),
+    () => EntertainmentNewsCubit(
+      fetchEntertainmentNewsUseCase: FetchEntertainmentNewsUseCase(getIt()),
+    ),
   );
 
   getIt.registerFactory<BusinessNewsCubit>(
